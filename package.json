@@ -1,0 +1,22 @@
+{
+  "name": "npm-introduction",
+  "version": "1.0.0",
+  "description": "NPM Introduction",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohanCamiloL/npm-introduction.git"
+  },
+  "author": "Acamica",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JohanCamiloL/npm-introduction/issues"
+  },
+  "homepage": "https://github.com/JohanCamiloL/npm-introduction#readme",
+  "dependencies": {
+    "cool-images": "^1.0.3"
+  }
+}
