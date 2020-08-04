@@ -1,6 +1,7 @@
 const coolImages = require('cool-images');
 const moment = require('moment');
 const fs = require('fs');
+const { resolve } = require('path');
 
 const randomImage = coolImages.one();
 
@@ -10,18 +11,31 @@ const randomImage = coolImages.one();
  * @param {String} data Data to be written on file.
  */
 const writeOnFile = (data, fileName = 'log.txt') => {
-    fs.appendFile(fileName, data, (error) => {
-        if (error) console.log('Hubo un error en la escritura');
-        else console.log('Información guardada correctamente');
+    return new Promise((resolve, reject) => {
+        fs.appendFile(fileName, data, (error) => {
+            if (error) {
+                console.log('Hubo un error en la escritura');
+                reject();
+            } else {
+                console.log('Información guardada correctamente');
+                resolve();
+            }
+        });
     });
 }
 
 /**
- * Get ten images from cool-images module
+ * Get ten images from cool-images module.
  */
-const getTenRandomImages = () => {
-    const randomImages = coolImages.many(100, 200, 10);
+const getTenRandomImages = async () => {
+    const tenImages = coolImages.many(100, 200, 10);
+    const today = moment().format('YYYY/MM/DD hh:mm:ss');
 
-    randomImages
-        .forEach(randomImageURL => console.log(`Image URL: ${randomImageURL}`));
+    await writeOnFile(today + '\n');
+
+    tenImages.forEach(async imageUrl => await writeOnFile(imageUrl + '\n'));
+
+    await writeOnFile('----------------------------------------\n');
 }
+
+getTenRandomImages();
